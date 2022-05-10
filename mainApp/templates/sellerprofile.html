@@ -1,0 +1,115 @@
+{% extends 'index.html' %}
+{% load static %}
+    {% block title %}
+    <title>Myshop | Profile</title>
+    {% endblock %}
+
+    {% block corousel %}
+    {% endblock %}
+    
+    {% block prod_header %}
+    <h1 style="background-color: royalblue;padding: 20px 0px;margin-top: 8vh;text-align: center; ">SELLER PROFILE SECTION</h1>
+    <div  class="container-fluid background text-light mt-2">
+        <div class="row">
+            <div class="col-xxl-6">
+                {% if User.pic %}
+                <img src="{{User.pic.url}}" height="600px" width="100%" alt="">   
+                {% else %}
+                <img src="{% static 'images/img5.jpg'%}" alt="">   
+                {% endif %}
+            </div>
+            <div class="col-xxl-6">
+                <table class="table table-light table-striped table-hover" >
+                    <tr>
+                        <th>Name : </th>
+                        <td>{{User.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>user name : </th>
+                        <td>{{User.username}}</td>
+                    </tr>
+                    <tr>
+                        <th>Email : </th>
+                        <td>{{User.email}}</td>
+                    </tr>
+                    <tr>
+                        <th>Phone : </th>
+                        <td>{{User.phone}}</td>
+                    </tr>
+                    <tr>
+                        <th>Address : </th>
+                        <td>{{User.address1}}</td>
+                    </tr>
+                    <tr>
+                        <th>Address2 : </th>
+                        <td>{{User.address2}}</td>
+                    </tr>
+                    <tr>
+                        <th>Pin : </th>
+                        <td>{{User.pin}}</td>
+                    </tr>
+                    <tr>
+                        <th>City : </th>
+                        <td>{{User.city}}</td>
+                    </tr>
+                    <tr>
+                        <th>State : </th>
+                        <td>{{User.state}}</td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td><a class="btn background-primary" href="/updateprofile/">Update profile</a></td>
+                    </tr>
+                  </table> 
+
+            </div>
+        </div>
+        <div class="containser-fluid">
+            <div class="row">
+                
+                <h1 style="background-color: royalblue;padding: 20px 0px;margin-top: 2vh;text-align: center; " >seller product section <span style="color: rgb(0, 255, 255,.0);" ><a href="/addproduct/">Add product</a></span></h1>
+            </div>
+        
+    </div>
+    <div class="table-responsive">
+        <table class="table table-light table-striped table-hover">
+            <tr>
+                <th></th>
+                <th>name</th>
+                <th>base price</th>
+                <th>discount</th>
+                <th>final price</th>
+                <th>color</th>
+                <th>size</th>
+                <th>stock</th>
+                <th></th>
+                <th></th>  
+            </tr>
+            {% for i in Products %}
+            <tr>
+                {% if i.pic1 %}
+                <td><img src="{{i.pic1.url}}" width="150px" height="150px" alt=""></td>
+                {% else %}
+                <td><img src="{% static 'images/noimagep.jpg' %}" width="150px" height="150px" alt=""></td>
+                {% endif %}
+                <td>{{i.name}}</td>
+                <td>{{i.baseprice}}</td>
+                <td>{{i.discount}}</td>
+                <td>{{i.finalprice}}</td>
+                <td>{{i.color}}</td>
+                <td>{{i.size}}</td>
+                {% if i.stock %}
+                <td>availabe</td>
+                {% else %}
+                <td>Not availabe</td>
+                {% endif %}
+                <td><a href="/editproduct/{{i.id}}/"><box-icon name='edit-alt'></box-icon></a></td>
+                <td><a href="/deleteproduct/{{i.id}}/"><box-icon name='trash'></box-icon></a></td>
+
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+    {% endblock %}

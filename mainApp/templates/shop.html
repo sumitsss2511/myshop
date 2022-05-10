@@ -1,0 +1,58 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}
+<title>MYSHOP | SHOP</title>
+{% endblock %}
+{% block corousel %}
+{% endblock %}
+
+{% block prod_header %}
+<div  class="container-fluid background text-light p-3 text-center mt-2">
+    <h1 style="background-color: royalblue;padding: 20px 0px;margin-top: 8vh;">SHOP SECTION</h1>
+</div>
+<div class="shop_products" >
+    <div class="left_sp" >
+        <div>
+            <div><h5>Main Category</h5></div>
+            <a href="/shop/all/{{SC}}/{{BR}}">All</a>
+            {% for i in MainCat %}
+            <div>
+                <a href="/shop/{{i.name}}/{{SC}}/{{BR}}">{{i.name}}</a>
+            </div>
+            {% endfor %}
+        </div>
+        <div>
+            <div><h5>Sub Category</h5></div>
+            <a href="/shop/{{MC}}/all/{{BR}}">All</a>
+            {% for i in SubCat %}
+            <div>
+                <a href="/shop/{{MC}}/{{i.name}}/{{BR}}">{{i.name}}</a>
+            </div>
+            {% endfor %}
+        </div>
+        <div>
+            <div><h5>Brands</h5></div>
+            <a href="/shop/{{MC}}/{{SC}}/all">All</a>
+            {% for i in Brand %}
+            <div>
+                <a href="/shop/{{MC}}/{{SC}}/{{i.name}}">{{i.name}}</a>
+            </div>
+            {% endfor %}
+        </div>
+        
+    </div>
+<div class="right_sp">
+    {% for i in Data %}
+        <div class="card" style="width: 20rem; margin: 10px 0px; ">
+            <img src="{{i.pic1.url}}" class="card-img-top" height="250vh" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{i.name}}</h5>
+                <p class="card-text">{{i.description}}</p>
+                <p>Rs. {{i.finalprice}} <strike>{{i.baseprice}}</strike></p>
+                <a href="/product/{{i.id}}/" class="btn btn-primary">Add to Cart</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

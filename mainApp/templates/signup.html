@@ -1,0 +1,53 @@
+{% extends 'index.html' %}
+{% load static %}
+    {% block title %}
+    <title>SignUp | Login</title>
+    {% endblock %}
+
+    {% block corousel %}
+    {% endblock %}
+
+    {% block prod_header %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xxl-6 p-0">
+                <img src="{% static 'images/welcome.jpg' %}" height="750px" width="100%" alt="">
+            </div>
+            <div class="col-xxl-6 mt-5 p-4">
+                <div style="text-align: center;" ><h2>Welcome to MyShop</h2></div>
+                <form action="#" method="post" >
+                    {% csrf_token %}
+                    <div class="mb-3">
+                      <label class="form-label"  >Name</label>
+                      <input type="text" class="form-control" name="name" placeholder="Enter Your Name">
+                    </div>
+                    <div class="mb-3">
+                      <label  class="form-label"  >User Name</label>
+                      <input type="text" class="form-control" name="username" placeholder="Enter Your User Name">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label"  >Email</label>
+                      <input type="email" class="form-control" name="email" placeholder="Enter Your Email ">
+                    </div>
+                    <div class="mb-3">
+                      <label for="phone" class="form-label"  >Phone</label>
+                      <input type="text" class="form-control" name="phone" placeholder="Enter Your Phone Number ">
+                    </div>
+                    <div class="mb-3">
+                      <label for="username" class="form-label"  >Account Type</label>
+                      <select name="actype" class="form-control">
+                          <option value="buyer">Buyer</option>
+                          <option value="seller">Seller</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="password" class="form-label">Password</label>
+                      <input type="password" name="password" class="form-control" placeholder="Enter Your Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">SignUp</button>
+                    <a href="/login/">Already user?LogIn</a>
+                  </form>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

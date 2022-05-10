@@ -1,0 +1,111 @@
+{% extends 'index.html' %}
+{% load static %}
+    {% block title %}
+    <title>Myshop | Add Product</title>
+    {% endblock %}
+
+    {% block corousel %}
+    {% endblock %}
+    
+    
+    {% block prod_header %}
+<div class="container" style="margin-top: 8vh;" >
+    <form action="#" method="post" enctype="multipart/form-data" >
+        {% csrf_token %}
+        <div class="mb-3">
+        <label class="form-label"  >Name</label>
+        <input type="text" class="form-control" name="name" placeholder="Enter Your Name">
+        </div>
+        <div class="mb-3">
+            <label class="form-label"  >Main Category</label>
+            <select name="maincategory" id="" class="form-control" >
+                {% for i in MainCat %}
+                <option value="{{i.name}}">{{i.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label"  >Sub Category</label>
+            <select name="subcategory" id="" class="form-control" >
+                {% for i in SubCat %}
+                <option value="{{i.name}}">{{i.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label"  >Brand</label>
+            <select name="brand" id="" class="form-control" >
+                {% for i in Brand %}
+                <option value="{{i.name}}">{{i.name}}</option>
+                {% endfor %}  
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label"  >Seller</label>
+            <select name="seller" id="" class="form-control" >
+                
+                <option value="{{Seller.name}}">{{Seller.name}}</option>
+       
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label"  >Base price</label>
+            <input type="number" class="form-control" name="baseprice" placeholder="Enter Your Phone Number ">
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label"  >Discount</label>
+            <input type="number" class="form-control" name="discount" placeholder="Enter Your Phone Number ">
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label"  >color</label>
+            <input type="text" class="form-control" name="color" placeholder="Enter Your Phone Number ">
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label"  >size</label>
+            <input type="text" class="form-control" name="size" placeholder="Enter Your Phone Number ">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label"  >description</label>
+            <textarea class="form-control" name="description" id="" cols="30" rows="10"></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label"  >Stock</label>
+            <select name="stock" id="" class="form-control" >
+                <option value="True">In Stock</option>
+                <option value="False">Out Of Stock</option>
+            </select>
+        </div>
+        <div class="row">
+            <div class="class col-xxl-3">
+                <div class="mb-3">
+                    <label for="pic1" class="form-label">Picture-1</label>
+                    <input type="file"  name="pic1" class="form-control" placeholder="Enter Your Password">
+                </div>
+            </div>
+            <div class="class col-xxl-3">
+                <div class="mb-3">
+                    <label for="pic2" class="form-label">Picture-2</label>
+                    <input type="file"  name="pic2" class="form-control" placeholder="Enter Your Password">
+                </div>
+                
+            </div>
+            <div class="class col-xxl-3">
+                <div class="mb-3">
+                    <label for="pic3" class="form-label">Picture-3</label>
+                    <input type="file"  name="pic3" class="form-control" placeholder="Enter Your Password">
+                </div>
+                
+            </div>
+            <div class="class col-xxl-3">
+                <div class="mb-3">
+                    <label for="pic4" class="form-label">Picture-4</label>
+                    <input type="file"  name="pic4" class="form-control" placeholder="Enter Your Password">
+                </div>
+
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+
+</div>
+{% endblock %}

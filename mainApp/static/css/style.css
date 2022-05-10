@@ -1,0 +1,29 @@
+.left_sp a{
+    text-decoration: none;
+    color: blue;
+}
+.right_sp{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin: 0 5vw;
+}
+.shop_products{
+    display: grid;
+    grid-template-columns: 250px auto;
+}
+
+.shop_products h5{
+    text-align: center;
+    justify-content: center;
+}
+.shop_products a{
+    display: flex;
+    justify-content: center;
+}
+.product_pic_grid{
+    display: grid;
+    grid-template-columns: 50vw 4fr;
+}
+.product_left{
+    width: 50vw;
+}

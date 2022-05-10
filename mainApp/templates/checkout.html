@@ -1,0 +1,113 @@
+{% extends 'index.html' %}
+{% load cart %}
+{% load static %}
+    {% block title %}
+    <title>Myshop | Profile</title>
+    {% endblock %}
+
+    {% block corousel %}
+    {% endblock %}
+    
+    {% block prod_header %}
+    <h1 style="background-color: royalblue;padding: 20px 0px;margin-top: 8vh;text-align: center; ">CHECKOUT SECTION</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xxl-6">
+                <form action="#" method="post" enctype="multipart/form-data" >
+                    {% csrf_token %}
+                    <div class="mb-3">
+                      <label class="form-label"  >Name</label>
+                      <input type="text" value="{{User.name}}" class="form-control" name="name" placeholder="Enter Your Name">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label"  >Email</label>
+                        <input type="email" value="{{User.email}}" class="form-control" name="email" placeholder="Enter Your Email ">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label"  >Phone</label>
+                        <input type="text" value="{{User.phone}}" class="form-control" name="phone" placeholder="Enter Your Phone Number ">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label"  >Address1</label>
+                      <input type="text" value="{{User.address1}}" class="form-control" name="address1" placeholder="Enter Your Name">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label"  >Address2</label>
+                      <input type="text" value="{{User.address2}}" class="form-control" name="address2" placeholder="Enter Your Name">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label"  >Pin</label>
+                      <input type="text" value="{{User.pin}}" class="form-control" name="pin" placeholder="Enter Your Name">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label"  >City</label>
+                      <input type="text" value="{{User.city}}" class="form-control" name="city" placeholder="Enter Your Name">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label"  >State</label>
+                      <input type="text" value="{{User.state}}" class="form-control" name="state" placeholder="Enter Your Name">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                  </form>
+            </div>
+            <div class="col-xxl-6">
+                <div  class="container-fluid background text-light mt-2">
+                    <!--  -->
+                    <div class="table-responsive">
+                        <table class="table table-light table-striped table-hover">
+                            <tr>
+                                <th>name</th>
+                                <th>Price</th>
+                                <th>quantity</th>
+                                <th>Total Price</th> 
+                            </tr>
+                            {% for i in Products %}
+                            <tr>
+                                <td>{{i.name}}</td>
+                                <td>{{i.finalprice}}</td>
+                                <td>{{request|cartQuantity:i.id}}</td>
+                                <td>{{request|cartFinal:i.id}}</td>
+                            </tr>
+                            {% endfor %}
+                            <tr>
+                                <td>Total :</td>
+                                <td></td>
+                                <td></td>
+                                <td>{{Total}}</td>
+                            </tr>
+                            <tr>
+                                <td>Shipping :</td>
+                                <td></td>
+                                <td></td>
+                                <td>{{Shipping}}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Final Amount:</td>
+                                <td></td>
+                                <td>{{Final}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        <label class="form-label" >Payment Mode</label>
+                                        <select name="mode" id="" class="form-control">
+                                            <option value="cod">COD</option>
+                                            <option value="netbanking">Net Banking</option>
+                                        </select>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <tr>
+                                    <td colspan="4" ><button href="/pay/" class="btn bg-success text-light w-100" >Place Order</button></td>
+                                </tr>
+                            </tr>
+                        </form>
+                        </table>
+                    </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

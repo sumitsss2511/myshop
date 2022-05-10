@@ -1,0 +1,166 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load cart %}
+    {% block title %}
+    <title>Myshop | Profile</title>
+    {% endblock %}
+
+    {% block corousel %}
+    {% endblock %}
+    
+    {% block prod_header %}
+    <h1 style="background-color: royalblue;padding: 20px 0px;margin-top: 8vh;text-align: center; ">BUYER PROFILE SECTION</h1>
+    <div  class="container-fluid background text-light mt-2">
+        <div class="row">
+            <div class="col-xxl-6">
+                {% if User.pic %}
+                <img src="{{User.pic.url}}" alt="">   
+                {% else %}
+                <img src="{% static 'images/img5.jpg'%}" alt="">   
+                {% endif %}
+            </div>
+            <div class="col-xxl-6">
+                <table class="table table-light table-striped table-hover" >
+                    <tr>
+                        <th>Name : </th>
+                        <td>{{User.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>user name : </th>
+                        <td>{{User.username}}</td>
+                    </tr>
+                    <tr>
+                        <th>Email : </th>
+                        <td>{{User.email}}</td>
+                    </tr>
+                    <tr>
+                        <th>Phone : </th>
+                        <td>{{User.phone}}</td>
+                    </tr>
+                    <tr>
+                        <th>Address : </th>
+                        <td>{{User.address1}}</td>
+                    </tr>
+                    <tr>
+                        <th>Address2 : </th>
+                        <td>{{User.address2}}</td>
+                    </tr>
+                    <tr>
+                        <th>Pin : </th>
+                        <td>{{User.pin}}</td>
+                    </tr>
+                    <tr>
+                        <th>City : </th>
+                        <td>{{User.city}}</td>
+                    </tr>
+                    <tr>
+                        <th>State : </th>
+                        <td>{{User.state}}</td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td><a class="btn background-primary" href="/updateprofile/">Update profile</a></td>
+                    </tr>
+                  </table> 
+
+            </div>
+        </div>
+    <!--  -->
+    <div class="table-responsive">
+        <h1 style="background-color: royalblue;padding: 20px 0px;margin-top: 8vh;text-align: center; ">WISHLIST SECTION</h1>
+        <table class="table table-light table-striped table-hover">
+            <tr>
+                <th></th>
+                <th>name</th>
+                <th>base price</th>
+                <th>discount</th>
+                <th>final price</th>
+                <th>color</th>
+                <th>size</th>
+                <th>stock</th>
+                <th></th>
+                <th></th>  
+            </tr>
+            {% for i in Wishlist %}
+            <tr>
+                {% if i.product.pic1 %}
+                <td><img src="{{i.product.pic1.url}}" width="150px" height="150px" alt=""></td>
+                {% else %}
+                <td><img src="{% static 'images/noimagep.jpg' %}" width="150px" height="150px" alt=""></td>
+                {% endif %}
+                <td>{{i.product.name}}</td>
+                <td>{{i.product.baseprice}}</td>
+                <td>{{i.product.discount}}</td>
+                <td>{{i.product.finalprice}}</td>
+                <td>{{i.product.color}}</td>
+                <td>{{i.product.size}}</td>
+                {% if i.product.stock %}
+                <td>availabe</td>
+                {% else %}
+                <td>Not availabe</td>
+                {% endif %}
+                <td><a href="/product/{{i.product.id}}/">add_to_cart</a></td>
+                
+                <td><a href="/deletewishlist/{{i.id}}/"><box-icon name='trash'></box-icon></a></td>
+
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="table-responsive">
+        <h1 style="background-color: royalblue;padding: 20px 0px;margin-top: 8vh;text-align: center; ">ORDER HISTORY SECTION</h1>
+        <table class="table table-light table-striped table-hover">
+            <tr>
+                <th>ID</th>
+                <th>ITEMS</th>
+                <th>Payment Mode</th>
+                <th>Payment Status</th>
+                <th>Order Status</th>
+                <th></th>
+                <th></th>
+            </tr>
+            {% for i in Checkout %}
+            <tr>
+                <td>{{i.id}}</td>
+                <td>
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Color</th>
+                            <th>Size</th> 
+                            <th></th>
+                        </tr>
+                        {% for item in i.products|products %}
+                        <tr>
+                            <td><img src={{item|productImage}} width="50px" height="50px"></td>
+                            <td>{{ item|productName }}</td>
+                            <td>{{ item|productPrice }}</td>
+                            <td>{{ item|productColor }}</td>
+                            <td>{{ item|productSize }}</td>
+                            <td></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </td>
+                <td>{{ request|paymentMode:i.mode }}</td>
+                <td>{{ request|paymentStatus:i.paymentStatus }}</td>
+                <td>{{ request|orderStatus:i.status }}</td>
+                {% if request|checkoutDelete:i.paymentStatus %}
+                <td><a href="/paynow/{{i.id}}/"><span
+                    class="material-icons" style="font-size: 20px;color:navy" title="Pay now">credit_card</span></a></td>
+                {% else  %}
+                <td></td>
+                {% endif %}
+                {% if request|checkoutDelete:i.paymentStatus %}
+                <td><a href="/deleteCheckout/{{i.id}}/"><span
+                    class="material-icons" style="font-size: 20px;color:navy">delete_forever</span></a></td>
+                {% else  %}
+                <td></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+
+
+    {% endblock %}

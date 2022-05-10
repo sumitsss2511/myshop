@@ -1,0 +1,94 @@
+{% extends 'index.html' %}
+{% load cart %}
+{% load static %}
+    {% block title %}
+    <title>Myshop | Profile</title>
+    {% endblock %}
+
+    {% block corousel %}
+    {% endblock %}
+    
+    {% block prod_header %}
+    <h1 style="background-color: royalblue;padding: 20px 0px;margin-top: 8vh;text-align: center; ">CART SECTION</h1>
+    <div  class="container-fluid background text-light mt-2">
+    <!--  -->
+    <div class="table-responsive">
+        <table class="table table-light table-striped table-hover">
+            <tr>
+                <th></th>
+                <th>name</th>
+                <th>color</th>
+                <th>size</th>
+                <th>Price</th>
+                <th>quantity</th>
+                <th>Total Price</th>
+                <th></th>  
+            </tr>
+            {% for i in product %}
+            <tr>
+                {% if i.pic1 %}
+                <td><img src="{{i.pic1.url}}" width="150px" height="150px" alt=""></td>
+                {% else %}
+                <td><img src="{% static 'images/noimagep.jpg' %}" width="150px" height="150px" alt=""></td>
+                {% endif %}
+                <td>{{i.name}}</td>
+                <td>{{i.color}}</td>
+                <td>{{i.size}}</td>
+                <td>{{i.finalprice}}</td>
+                <td>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <input hidden class="hidden" name="id" value="{{i.id}}"  >
+                        <input type="number" min="1" name="q" value="{{request|cartQuantity:i.id}}">
+                        <button type="submit" class="btn  text-light" ><box-icon name='up-arrow-alt'></box-icon></button>
+                    </form>
+
+                </td>
+                <td>{{request|cartFinal:i.id}}</td>
+                <td><a href="/deletecart/{{i.id}}/"><box-icon name='trash'></box-icon></a></td>
+
+            </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Total :</td>
+                <td></td>
+                <td></td>
+                <td>{{Total}}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Shipping :</td>
+                <td></td>
+                <td></td>
+                <td>{{Shipping}}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Final Amount:</td>
+                <td></td>
+                <td></td>
+                <td>{{Final}}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                {% if Final %}
+                <td colspan="4" ><a href="/checkout/" class="btn btn-success text-light">Checkout</a></td>
+                {% else %}
+                <td><a href="#" class="btn bg-primary text-light">Checkout</a></td>
+                {% endif %}
+            </tr>
+        </table>
+    </div>
+    {% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}
+<title>MYSHOP | Product</title>
+{% endblock %}
+{% block corousel %}
+{% endblock %}
+{% block prod_header %}
+<div class="container-fluid background text-light p-3 text-center mt-2">
+    <h1 style="background-color: royalblue;padding: 20px 0px;margin-top: 8vh;">PRODUCT SECTION</h1>
+    <div class="row">
+        <div class="col-xxl-6">
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="{{Product.pic1.url}}" class="d-block w-100" alt="...">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="{{Product.pic2.url}}" class="d-block w-100" alt="...">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="{{Product.pic3.url}}" class="d-block w-100" alt="...">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+        </div>
+        <div class="col-xxl-6 text-dark" style="text-align: left;">
+            <table class="table table-light table-striped table-hover" >
+                <tr>
+                    <th>Product Name : </th>
+                    <td>{{Product.name}}</td>
+                </tr>
+                <tr>
+                    <th>Product Discription : </th>
+                    <td>{{Product.description}}</td>
+                </tr>
+                <tr>
+                    <th>Product Size : </th>
+                    <td>{{Product.size}}</td>
+                </tr>
+                <tr>
+                    <th>Product Brand : </th>
+                    <td>{{Product.brand}}</td>
+                </tr>
+                <tr>
+                    <th>Product price : </th>
+                    <td>Rs. {{Product.finalprice}} <strike>{{Product.baseprice}}</strike></td>
+                </tr>
+                <tr>
+                    <th>Product Stock : </th>
+                    {% if Product.stock %}
+                    <td>In stock</td>
+                    {% else %}
+                    <td>Out Of Stock</td>
+                    {% endif %}
+                </tr>
+              </table>
+              <tr>
+                  <form action="#" method="post" >
+                    {% csrf_token %}
+                    <input type="number" min="1" value="1" name="q" >
+                    <button type="submit" class="btn background bg-primary text-light" style="display: inline-block;" >Add to cart</button>
+                    <a href="/wishlist/{{Product.id}}" class="btn background text-light bg-primary"  style="display: inline-block;" >Add to wishlist</a>
+                  </form>
+              </tr>
+        </div>
+
+    </div>
+    </div>
+</div>
+
+
+{% endblock %}
